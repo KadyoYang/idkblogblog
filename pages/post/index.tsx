@@ -15,7 +15,7 @@ import { PostListLayout } from "../../layouts/PostListLayout";
 type PostIndexProps = {
   posts: PostType[];
 };
-    
+
 const Index: React.FC<PostIndexProps> = ({ posts }) => {
   console.log(posts);
   return (

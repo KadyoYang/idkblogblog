@@ -10,8 +10,8 @@ import {
   AuthorLinks,
   AuthorLink,
 } from "./PostLayout.style";
-import GiscusBox from "../components/giscus/giscus";
-import { PostType } from "../lib/postApi"
+import GiscusBox from "../components/common/giscus/giscus";
+import { PostType } from "../lib/postApi";
 
 type PostsProps = {
   post: PostType;
@@ -43,7 +43,7 @@ export const PostLayout = ({ post }: PostsProps) => {
           <h2>{post.title}</h2>
           {post.content}
         </ContentsWrap>
-        <GiscusBox slug={post.slug}/>
+        <GiscusBox slug={post.slug} />
       </SectionWrap>
     </SectionContainer>
   );

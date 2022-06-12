@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PostCardItem } from "../components/posts/PostCard/PostCard";
+import { PostCardItem } from "../components/common/PostCard/PostCard";
 import { PostType } from "../lib/postApi";
 
 import {
@@ -10,7 +10,7 @@ import {
   PostsSearch,
   PostsSearchBtn,
   PostNumber,
-  PostList
+  PostList,
 } from "./PostListLayout.style";
 
 type PostIndexProps = {
@@ -29,17 +29,13 @@ export const PostListLayout = ({ posts }: PostIndexProps) => {
               <PostsSearch spellCheck={false} placeholder="Search" />
               <PostsSearchBtn />
             </PostsSearchBox>
-            <PostNumber>
-              4 articles
-            </PostNumber>
+            <PostNumber>4 articles</PostNumber>
           </PostsHeaderWrap>
 
           {/* Posts 게시글 카드 */}
           <PostList>
             {posts.map((post, idx) => {
-              return (
-                <PostCardItem post={post} key={idx}/>
-              );
+              return <PostCardItem post={post} key={idx} />;
             })}
           </PostList>
         </PostsWrap>
