@@ -1,39 +1,25 @@
 import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
+import { Post, PostFields } from "../types/Post";
 
-export const postsDirectory = join(process.cwd(), "_posts", "post");
+const postsDirectory = join(process.cwd(), "_posts", "post");
 
+/**
+ * post 모든 파일명을 가져온다
+ * @returns _posts/post 디렉토리의 모든 파일명 배열 Slug
+ */
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
 }
 
-export type PostFieldsType =
-  | "slug"
-  | "title"
-  | "date"
-  | "author"
-  | "content"
-  | "ogImage"
-  | "coverImage";
-
-export type PostType = {
-  slug: string;
-  title: string;
-  date: Date;
-  author: {
-    name: string;
-    picture: string;
-  };
-  content: string;
-  ogImage: string;
-  coverImage: string;
-};
-
-export function getPostBySlug(
-  slug: string,
-  fields: PostFieldsType[] = []
-): PostType {
+/**
+ * slug로 실제 파일을 읽어서 Post객체로 리턴한다
+ * @param slug 읽을 파일명
+ * @param fields 사용할 Post field
+ * @returns Post 객체
+ */
+export function getPostBySlug(slug: string, fields: PostFields[] = []): Post {
   // .mdx 제거
   const realSlug = slug.replace(/\.mdx$/, "");
   // 포스트 mdx 파일이 있는 경로와 realSlug(목표 파일이름) 합쳐서 fullPath 만듦
@@ -69,7 +55,12 @@ export function getPostBySlug(
   return items;
 }
 
-export function getAllPosts(fields: PostFieldsType[] = []) {
+/**
+ * 모든 Post를 가져온다
+ * @param fields 가져올 field
+ * @returns Post 배열
+ */
+export function getAllPosts(fields: PostFields[] = []) {
   const slugs = getPostSlugs();
   const posts = slugs
     .map((slug) => getPostBySlug(slug, fields))
