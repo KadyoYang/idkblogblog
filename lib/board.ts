@@ -16,15 +16,22 @@ import matter from "gray-matter";
  * }
  */
 
+type MdxContentType = string & { _brand: "mdxContent" };
+
+type BoardDescription = {
+  name: string;
+  description: string;
+};
+
 type Post = {
   meta: Record<string, any>;
-  content: string;
+  content: MdxContentType;
 };
 
 type Board = {
   // #TODO board descripton.md 에서 추출하도록 추가
   name: string;
-  content?: string; // board description
+  description?: string; // board description
   posts: Array<Post>;
   childBoard: Array<Board>;
 };
@@ -39,13 +46,20 @@ export function getBoard(dirName: string, path = _POST_BASE_PATH): Board {
   const dirs = subDirs.filter((v) => v.isDirectory());
   const mdxFiles = subDirs.filter((v) => v.isFile());
 
+  const boardDescription = fs.existsSync(join(basePath, "description.mdx"))
+    ? (matter(fs.readFileSync(join(basePath, "description.mdx")))
+        .data as BoardDescription)
+    : undefined;
+
+  console.log(boardDescription);
   // console.log(mdxFiles);
   return {
-    name: dirName,
+    name: boardDescription?.name || dirName,
+    description: boardDescription?.description || "",
     posts: mdxFiles.map((v) => {
       const fileContents = fs.readFileSync(join(basePath, v.name), "utf8");
       const { data, content } = matter(fileContents);
-      return { content, meta: data };
+      return { content: content as MdxContentType, meta: data };
     }),
     childBoard: dirs.map((v) => getBoard(v.name, basePath)),
   };
