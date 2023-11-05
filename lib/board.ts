@@ -29,14 +29,13 @@ type Post = {
 };
 
 type Board = {
-  // #TODO board descripton.md 에서 추출하도록 추가
   name: string;
   description?: string; // board description
   posts: Array<Post>;
   childBoard: Array<Board>;
 };
 
-export const _POST_BASE_PATH = join(process.cwd(), "_posts");
+export const _POST_BASE_PATH = join(process.cwd(), "_board");
 
 // #TODO unit test 로 검증 필요
 export function getBoard(dirName: string, path = _POST_BASE_PATH): Board {
@@ -51,8 +50,6 @@ export function getBoard(dirName: string, path = _POST_BASE_PATH): Board {
         .data as BoardDescription)
     : undefined;
 
-  console.log(boardDescription);
-  // console.log(mdxFiles);
   return {
     name: boardDescription?.name || dirName,
     description: boardDescription?.description || "",
