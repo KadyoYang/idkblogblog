@@ -7,8 +7,18 @@ import { join } from "path";
 export function getPostDetail(path: string, slug: string) {
   const result = matter(fs.readFileSync(join(path, slug), "utf8"));
   return {
+    slug,
     content: result.content,
-    meta: result.data,
+    meta: result.data as {
+      title: string;
+      // excerpt: string;
+      // coverImage: string;
+      writtenAt: Date;
+      // author: {
+      //   name: string;
+      // };
+      // ogImage: { url: string };
+    },
   };
 }
 
