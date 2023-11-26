@@ -1,5 +1,7 @@
 import { getPostDetail, getPostList } from "@/util/board";
 import { join } from "path";
+import showdown from "showdown";
+import "./markdown.css";
 
 export async function generateStaticParams() {
   const posts = getPostList(join(process.cwd(), "_board", "note"));
@@ -17,9 +19,14 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   const postDetail = getPostDetail(join(process.cwd(), "_board", "note"), slug);
 
+  let conv = new showdown.Converter();
+  let html = conv.makeHtml(postDetail.content);
   return (
     <>
-      <h2>{JSON.stringify(postDetail)}</h2>
+      <div
+        dangerouslySetInnerHTML={{ __html: html }}
+        className="markdown-body"
+      ></div>
     </>
   );
 }
