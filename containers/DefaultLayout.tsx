@@ -9,6 +9,7 @@ const DefaultLayoutStyle = styled.div`
   flex-direction: column;
   /* background-color: #e6e6e6; */
   width: 1000px;
+  /* min-height: 100%; */
   margin: 0 auto;
   font-size: 15px;
   font-family: sans-serif;
@@ -22,7 +23,7 @@ const DefaultLayoutStyle = styled.div`
     display: flex;
     width: 1000px;
     /* background-color: red; */
-    height: 500px;
+    /* min-height: 70%; */
 
     .meta_section {
       display: flex;
@@ -31,7 +32,7 @@ const DefaultLayoutStyle = styled.div`
     }
 
     .content_section {
-      max-width: 800px;
+      width: 100%;
     }
   }
 
