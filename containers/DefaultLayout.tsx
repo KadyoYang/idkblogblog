@@ -3,47 +3,7 @@ import HeaderMenu from "@/components/HeaderMenu";
 import Profile from "@/components/Profile";
 import styled from "@emotion/styled";
 import { ReactNode } from "react";
-
-const DefaultLayoutStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* background-color: #e6e6e6; */
-  width: 1000px;
-  /* min-height: 100%; */
-  margin: 0 auto;
-  font-size: 15px;
-  font-family: sans-serif;
-
-  header {
-    /* background-color: blue; */
-    height: 100px;
-  }
-
-  section {
-    display: flex;
-    width: 1000px;
-    /* background-color: red; */
-    /* min-height: 70%; */
-
-    .meta_section {
-      display: flex;
-      flex-direction: column;
-      max-width: 200px;
-    }
-
-    .content_section {
-      width: 100%;
-    }
-  }
-
-  footer {
-    background-color: silver;
-    height: 100px;
-    width: 100%;
-
-    padding-top: 60px;
-  }
-`;
+import { DefaultLayoutStyle } from "./styles";
 
 const DefaultLayout: React.FC<{
   children: ReactNode;

@@ -11,6 +11,7 @@ export function getPostDetail(path: string, slug: string) {
     content: result.content,
     meta: result.data as {
       title: string;
+      subTitle: string;
       // excerpt: string;
       // coverImage: string;
       writtenAt: Date;
