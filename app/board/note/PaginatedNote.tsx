@@ -66,31 +66,30 @@ export default function PaginatedNote(props: PaginatedNoteProps) {
 
   return (
     <DefaultLayout>
-      <Container maxWidth={false}>
-        <Paper sx={{ minHeight: "600px" }}>
-          {targetPosts.map((v, i) => (
-            <Card
-              variant="outlined"
-              sx={{
-                maxWidth: "100%",
-                height: "100px",
-                marginBottom: "10px",
-                cursor: "pointer",
-              }}
-              key={i}
-              onClick={() => {
-                router.push(`/board/note/${encodeURIComponent(v.slug)}`);
-              }}
-            >
-              <CardContent>
-                <p>{v.meta.title}</p>
-                <Typography overflow={"hidden"} textOverflow={"ellipsis"}>
-                  {v.meta.subTitle}
-                </Typography>
-              </CardContent>
-            </Card>
-          ))}
-        </Paper>
+      <div style={{ maxHeight: "600px" }}>
+        <p>Note</p>
+        {targetPosts.map((v, i) => (
+          <Card
+            variant="outlined"
+            sx={{
+              maxWidth: "100%",
+              height: "100px",
+              marginBottom: "10px",
+              cursor: "pointer",
+            }}
+            key={i}
+            onClick={() => {
+              router.push(`/board/note/${encodeURIComponent(v.slug)}`);
+            }}
+          >
+            <CardContent>
+              <p>{v.meta.title}</p>
+              <Typography overflow={"hidden"} textOverflow={"ellipsis"}>
+                {v.meta.subTitle}
+              </Typography>
+            </CardContent>
+          </Card>
+        ))}
 
         <Stack direction={"row"} justifyContent={"space-around"}>
           <Pagination
@@ -100,7 +99,7 @@ export default function PaginatedNote(props: PaginatedNoteProps) {
             onChange={(e, v) => setPage(v)}
           />
         </Stack>
-      </Container>
+      </div>
     </DefaultLayout>
   );
 }

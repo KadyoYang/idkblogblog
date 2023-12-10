@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <DefaultLayout>
-      <h2>fuck off</h2>
+      <h2>hello</h2>
     </DefaultLayout>
   );
 }

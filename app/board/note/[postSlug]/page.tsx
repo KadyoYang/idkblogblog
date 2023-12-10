@@ -28,12 +28,12 @@ export default function Page({ params }: { params: { postSlug: string } }) {
   let html = conv.makeHtml(postDetail.content);
   return (
     <DefaultLayout>
-      <Container maxWidth={false}>
+      <div style={{ height: "100%" }}>
         <div
           dangerouslySetInnerHTML={{ __html: html }}
           className="markdown-body"
         ></div>
-      </Container>
+      </div>
     </DefaultLayout>
   );
 }
