@@ -4,21 +4,9 @@ import { colors } from "@mui/material";
 import { display } from "@mui/system";
 import { usePathname, useRouter } from "next/navigation";
 
-type Menu = {
-  name: string;
-  path: string;
-};
-
-type HeaderMenuProps = {
-  headerMenuTitle?: string;
-  menus: Menu[];
-};
-
 const HeaderMenuStyle = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
-  margin-top: 10px;
   hr {
     width: 100%;
     background: black;
@@ -34,20 +22,45 @@ const HeaderMenuStyle = styled.div`
   }
 `;
 
+type Menu = {
+  name: string;
+  path: string;
+};
+
+type HeaderMenuProps = {
+  menus: Menu[];
+};
+
 const HeaderMenu = (props: HeaderMenuProps) => {
-  const { menus, headerMenuTitle } = props;
+  const { menus } = props;
   const currentURI = usePathname();
   const router = useRouter();
   console.log(currentURI);
 
+  const currentURIArray = currentURI.split("/").map((v) => v);
+  const menuWeightList = menus.map((menu) =>
+    menu.path
+      .split("/")
+      .map((v) => v)
+      .reduce((prev, curr, i) => {
+        if (curr[i] && currentURIArray[i] && curr[i] === currentURIArray[i]) {
+          return prev + 1;
+        }
+        return prev;
+      }, 0)
+  );
+  const selectMenuIndex = menuWeightList.reduce((prev, curr, idx) => {
+    return menuWeightList[prev] < curr ? idx : prev;
+  }, 0);
+
   return (
     <HeaderMenuStyle>
-      <p>{headerMenuTitle}</p>
+      <p>{"Navigator chan"}</p>
       <hr />
       {menus.map((menu, i) => (
         <span
           key={i}
-          className={currentURI === menu.path ? "clicked" : ""}
+          className={selectMenuIndex === i ? "clicked" : ""}
           onClick={() => {
             router.push(menu.path);
           }}

@@ -1,35 +1,37 @@
 import styled from "@emotion/styled";
 
 export const DefaultLayoutStyle = styled.div`
+  border: 1px solid black;
   display: flex;
   flex-direction: column;
-  /* background-color: #e6e6e6; */
-  width: 950px;
+  width: 1000px;
   margin: 0 auto;
 
   header {
-    /* background-color: blue; */
-    height: 150px;
+    border: 1px solid black;
   }
 
   section {
+    border: 1px solid black;
     display: flex;
     width: 100%;
-    /* background-color: red; */
-    /* min-height: 70%; */
 
     .meta_section {
+      border: 1px solid black;
       display: flex;
       flex-direction: column;
+
       width: 16%;
     }
 
     .content_section {
+      border: 1px solid black;
       width: 84%;
     }
   }
 
   footer {
+    border: 1px solid black;
     background-color: silver;
     height: 300px;
     width: 100%;

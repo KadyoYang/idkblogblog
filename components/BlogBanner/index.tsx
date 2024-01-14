@@ -2,16 +2,6 @@
 import styled from "@emotion/styled";
 import { usePathname, useRouter } from "next/navigation";
 
-type Menu = {
-  name: string;
-  path: string;
-};
-
-type HeaderMenuProps = {
-  headerMenuTitle?: string;
-  menus: Menu[];
-};
-
 const BannerStyle = styled.div`
   display: flex;
   flex-direction: row;
@@ -31,9 +21,7 @@ const BlogBanner = () => {
 
   return (
     <BannerStyle>
-      <p onClick={() => router.push("/")}>
-        {"Common 개발자의 지구정복 작전계획"}
-      </p>
+      <p onClick={() => router.push("/")}>{"Yangchan Note :D"}</p>
     </BannerStyle>
   );
 };

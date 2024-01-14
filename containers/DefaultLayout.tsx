@@ -10,7 +10,11 @@ import BlogBanner from "@/components/BlogBanner";
 const DefaultLayout: React.FC<{
   children: ReactNode;
 }> = ({ children }) => {
-  const headerMenus = [{ name: "노트", path: "/board/note" }];
+  const headerMenus = [
+    { name: "노트", path: "/board/note" },
+    { name: "노트", path: "/board/note" },
+    { name: "노트", path: "/board/note" },
+  ];
 
   return (
     <DefaultLayoutStyle>
@@ -20,11 +24,7 @@ const DefaultLayout: React.FC<{
 
       <section>
         <div className="meta_section">
-          {/* <Profile
-            name="주인장"
-            description="본 사이트 정상 영업합니다. 저만 사용할겁니다"
-          /> */}
-          <HeaderMenu menus={headerMenus} headerMenuTitle="Menu" />
+          <HeaderMenu menus={headerMenus} />
         </div>
         <div className="content_section">{children}</div>
       </section>
