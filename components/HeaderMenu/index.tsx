@@ -60,7 +60,9 @@ const HeaderMenu = (props: HeaderMenuProps) => {
       {menus.map((menu, i) => (
         <span
           key={i}
-          className={selectMenuIndex === i ? "clicked" : ""}
+          className={
+            selectMenuIndex === i && menuWeightList[i] > 0 ? "clicked" : ""
+          }
           onClick={() => {
             router.push(menu.path);
           }}

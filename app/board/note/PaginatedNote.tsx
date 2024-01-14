@@ -2,6 +2,7 @@
 
 import DefaultLayout from "@/containers/DefaultLayout";
 import { Serialized, deserializeT, getPage } from "@/util/common-util";
+import styled from "@emotion/styled";
 import {
   Card,
   CardContent,
@@ -25,6 +26,21 @@ import { useCallback, useEffect, useState } from "react";
 //     props: {},
 //   };
 // }
+
+const PaginatedNoteWrapper = styled.div`
+  .header {
+  }
+
+  .content {
+    .post {
+      border: 1px solid black;
+      cursor: "pointer";
+      :hover {
+        background-color: yellow;
+      }
+    }
+  }
+`;
 
 type PaginatedNoteProps = {
   posts: Serialized<
@@ -66,31 +82,25 @@ export default function PaginatedNote(props: PaginatedNoteProps) {
 
   return (
     <DefaultLayout>
-      <div style={{ maxHeight: "600px" }}>
-        <p>Note</p>
-        {targetPosts.map((v, i) => (
-          <Card
-            variant="outlined"
-            sx={{
-              maxWidth: "100%",
-              height: "100px",
-              marginBottom: "10px",
-              cursor: "pointer",
-            }}
-            key={i}
-            onClick={() => {
-              router.push(`/board/note/${encodeURIComponent(v.slug)}`);
-            }}
-          >
-            <CardContent>
+      <PaginatedNoteWrapper>
+        <div className="header">Note</div>
+        <div className="content">
+          {targetPosts.map((v, i) => (
+            <div
+              className="post"
+              key={i}
+              onClick={() => {
+                router.push(`/board/note/${encodeURIComponent(v.slug)}`);
+              }}
+            >
               <p>{v.meta.title}</p>
-              <Typography overflow={"hidden"} textOverflow={"ellipsis"}>
-                {v.meta.subTitle}
-              </Typography>
-            </CardContent>
-          </Card>
-        ))}
+              {v.meta.subTitle}
+            </div>
+          ))}
+        </div>
+      </PaginatedNoteWrapper>
 
+      <div style={{ maxHeight: "600px" }}>
         <Stack direction={"row"} justifyContent={"space-around"}>
           <Pagination
             count={maxPage}
